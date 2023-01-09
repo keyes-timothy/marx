@@ -2,7 +2,7 @@
 # This script contains functions for various marx helpers and utilities.
 
 
-#' Calculate the magnitudes of the cancer-specific and lineage-specific
+#' Calculate the magnitudes of the disease-specific and lineage-specific
 #' components in a marx projection.
 #'
 #' @param marx_projection The output data.frame of marx_project()
@@ -42,7 +42,7 @@ marx_find_magnitudes <- function(marx_projection) {
   result <-
     dplyr::tibble(
       lineage_magnitude = lineage_magnitudes,
-      cancer_magnitude = disease_magnitudes,
+      disease_magnitude = disease_magnitudes,
       total_magnitude = total_magnitudes
     )
 

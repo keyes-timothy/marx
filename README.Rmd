@@ -1,0 +1,102 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# marx
+
+<!-- badges: start -->
+
+<!-- badges: end -->
+
+`marx` is an R package that implements [Ma]{.underline}trix factorization and [R]{.underline}esidual E[x]{.underline}pression (MARX), an algorithm for comparing high-dimensional biological measurements to a lower-dimensional reference linear subspace. Currently, MARX is unpublished and highly experimental.
+
+## Installation
+
+You can install the development version of marx from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("keyes-timothy/marx")
+```
+
+## Example
+
+This is a basic example for using `marx` to decompose an input dataset into two components: one that aligns with a reference dataset (represented as a linear subspace) and one that doesn't align with the reference.
+
+```{r example}
+library(marx)
+
+# simulate reference data 
+# this data is assumed to be an expression matrix in which rows represent 
+# observations and columns represent measurements (i.e. genes). 
+healthy_data <-
+  matrix(data = runif(n = 300 * 40), nrow = 300, ncol = 40) |>
+  dplyr::as_tibble()
+
+# simulate new data 
+disease_data <- 
+  matrix(data = runif(n = 700 * 40, min = 1, max = 2), nrow = 700, ncol = 40) |>
+  dplyr::as_tibble()
+
+# build a healthy reference subspace using the SVD
+healthy_subspace <- 
+  healthy_data |> 
+  # other method options include "nmf" and "pma"
+  marx_find_healthy_subspace(pca_threshold = 0.9, method = "svd")
+
+# project the disease_data onto the healthy subspace
+disease_projection <- 
+  disease_data |> 
+  marx_project(healthy_subspace = healthy_subspace)
+
+head(disease_projection)
+```
+
+marx can also compute the lineage- and disease-specific component magnitudes (i.e. the reconstruction and the reconstruction loss for each observation using the reference subspace):
+
+```{r}
+disease_projection |> 
+  marx_find_magnitudes() |> 
+  head()
+```
+
+We can compare the disease-specific component of the healthy data and the disease data:
+
+```{r}
+# find healthy projection
+healthy_projection <- 
+  healthy_data |> 
+  marx_project(healthy_subspace = healthy_subspace)
+
+# find healthy magnitudes 
+healthy_magnitudes <- 
+  healthy_projection |> 
+  marx_find_magnitudes()
+
+disease_magnitudes <- 
+  disease_projection |> 
+  marx_find_magnitudes()
+
+plot_tibble <- 
+  dplyr::bind_rows(
+    dplyr::mutate(healthy_magnitudes, sample_type = "healthy"), 
+    dplyr::mutate(disease_magnitudes, sample_type = "disease")
+  )
+
+plot_tibble |> 
+  ggplot2::ggplot(ggplot2::aes(x = disease_magnitude, fill = sample_type)) + 
+  ggplot2::geom_density(alpha = 0.5) + 
+  ggplot2::theme_bw() + 
+  ggplot2::labs(subtitle = "diseased tissue has a larger disease-specific component than healthy tissue")
+```

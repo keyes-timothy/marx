@@ -2,7 +2,7 @@
 % Please edit documentation in R/marx_utils.R
 \name{marx_find_magnitudes}
 \alias{marx_find_magnitudes}
-\title{Calculate the magnitudes of the cancer-specific and lineage-specific
+\title{Calculate the magnitudes of the disease-specific and lineage-specific
 components in a marx projection.}
 \usage{
 marx_find_magnitudes(marx_projection)
@@ -15,6 +15,6 @@ A data.frame containing the healthy- and disease-specific component
 magnitudes in marx_projection.
 }
 \description{
-Calculate the magnitudes of the cancer-specific and lineage-specific
+Calculate the magnitudes of the disease-specific and lineage-specific
 components in a marx projection.
 }
