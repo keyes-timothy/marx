@@ -63,12 +63,12 @@ head(disease_projection)
 #> # A tibble: 6 × 80
 #>   V1_lineage V2_lineage V3_lin…¹ V4_li…² V5_li…³ V6_li…⁴ V7_li…⁵ V8_li…⁶ V9_li…⁷
 #>        <dbl>      <dbl>    <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-#> 1       1.31       1.46     1.13    1.54    1.39    1.11    1.34    1.10    1.74
-#> 2       1.57       1.30     1.50    1.35    1.52    1.61    1.43    1.65    1.74
-#> 3       1.58       1.35     1.34    1.66    1.54    1.36    1.27    1.26    1.67
-#> 4       1.25       1.16     1.62    1.56    1.50    1.54    1.30    1.51    1.57
-#> 5       1.64       1.27     1.64    1.54    1.65    1.97    1.15    1.55    1.52
-#> 6       1.88       1.48     1.67    1.27    1.80    1.55    1.36    1.49    1.84
+#> 1       1.71       1.43     1.54    1.62    1.39    1.53    1.52    1.28    1.57
+#> 2       1.59       1.58     1.27    1.78    1.43    1.36    1.38    1.64    1.68
+#> 3       1.17       1.29     1.78    1.66    1.50    1.85    1.38    1.08    1.51
+#> 4       1.33       1.54     1.82    1.29    1.37    1.54    1.50    1.37    1.53
+#> 5       1.20       1.57     1.69    1.61    1.52    1.59    1.35    1.58    1.36
+#> 6       1.71       1.55     1.32    1.15    1.58    1.61    1.68    1.49    1.59
 #> # … with 71 more variables: V10_lineage <dbl>, V11_lineage <dbl>,
 #> #   V12_lineage <dbl>, V13_lineage <dbl>, V14_lineage <dbl>, V15_lineage <dbl>,
 #> #   V16_lineage <dbl>, V17_lineage <dbl>, V18_lineage <dbl>, V19_lineage <dbl>,
@@ -90,12 +90,12 @@ disease_projection |>
 #> # A tibble: 6 × 3
 #>   lineage_magnitude disease_magnitude total_magnitude
 #>               <dbl>             <dbl>           <dbl>
-#> 1              8.63              1.29            8.72
-#> 2              9.52              1.26            9.60
-#> 3              9.03              1.24            9.12
-#> 4              9.84              1.49            9.95
-#> 5              9.51              1.27            9.59
-#> 6              9.62              1.36            9.72
+#> 1              9.65              1.58            9.78
+#> 2              9.69              1.44            9.80
+#> 3              9.72              1.74            9.88
+#> 4              9.58              1.01            9.64
+#> 5              9.53              1.16            9.60
+#> 6              9.21              1.44            9.32
 ```
 
 We can compare the disease-specific component of the healthy data and
@@ -112,10 +112,12 @@ healthy_magnitudes <-
   healthy_projection |> 
   marx_find_magnitudes()
 
+# find disease magnitudes
 disease_magnitudes <- 
   disease_projection |> 
   marx_find_magnitudes()
 
+# make a simple density plot
 plot_tibble <- 
   dplyr::bind_rows(
     dplyr::mutate(healthy_magnitudes, sample_type = "healthy"), 

@@ -84,10 +84,12 @@ healthy_magnitudes <-
   healthy_projection |> 
   marx_find_magnitudes()
 
+# find disease magnitudes
 disease_magnitudes <- 
   disease_projection |> 
   marx_find_magnitudes()
 
+# make a simple density plot
 plot_tibble <- 
   dplyr::bind_rows(
     dplyr::mutate(healthy_magnitudes, sample_type = "healthy"), 
