@@ -38,10 +38,6 @@ library(marx)
 healthy_data <-
   matrix(data = runif(n = 300 * 40), nrow = 300, ncol = 40) |>
   dplyr::as_tibble()
-#> Warning: The `x` argument of `as_tibble.matrix()` must have unique column names if `.name_repair` is omitted as of tibble 2.0.0.
-#> Using compatibility `.name_repair`.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 
 # simulate new data 
 disease_data <- 
@@ -63,12 +59,12 @@ head(disease_projection)
 #> # A tibble: 6 × 80
 #>   V1_lineage V2_lineage V3_lin…¹ V4_li…² V5_li…³ V6_li…⁴ V7_li…⁵ V8_li…⁶ V9_li…⁷
 #>        <dbl>      <dbl>    <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>   <dbl>
-#> 1       1.71       1.43     1.54    1.62    1.39    1.53    1.52    1.28    1.57
-#> 2       1.59       1.58     1.27    1.78    1.43    1.36    1.38    1.64    1.68
-#> 3       1.17       1.29     1.78    1.66    1.50    1.85    1.38    1.08    1.51
-#> 4       1.33       1.54     1.82    1.29    1.37    1.54    1.50    1.37    1.53
-#> 5       1.20       1.57     1.69    1.61    1.52    1.59    1.35    1.58    1.36
-#> 6       1.71       1.55     1.32    1.15    1.58    1.61    1.68    1.49    1.59
+#> 1       1.15       1.75    1.56     1.49    1.40    1.23    1.42    1.35    1.27
+#> 2       1.38       1.29    1.48     1.35    1.22    1.53    1.51    1.62    1.93
+#> 3       1.47       1.45    1.86     1.79    1.38    1.44    1.35    1.59    1.56
+#> 4       1.64       1.48    1.39     1.58    1.47    1.55    1.73    1.44    1.84
+#> 5       1.23       1.39    1.28     1.44    1.06    1.43    1.52    1.45    1.24
+#> 6       1.16       1.48    0.933    1.72    1.76    1.41    1.58    1.51    1.86
 #> # … with 71 more variables: V10_lineage <dbl>, V11_lineage <dbl>,
 #> #   V12_lineage <dbl>, V13_lineage <dbl>, V14_lineage <dbl>, V15_lineage <dbl>,
 #> #   V16_lineage <dbl>, V17_lineage <dbl>, V18_lineage <dbl>, V19_lineage <dbl>,
@@ -90,12 +86,12 @@ disease_projection |>
 #> # A tibble: 6 × 3
 #>   lineage_magnitude disease_magnitude total_magnitude
 #>               <dbl>             <dbl>           <dbl>
-#> 1              9.65              1.58            9.78
-#> 2              9.69              1.44            9.80
-#> 3              9.72              1.74            9.88
-#> 4              9.58              1.01            9.64
-#> 5              9.53              1.16            9.60
-#> 6              9.21              1.44            9.32
+#> 1              9.33             0.959            9.38
+#> 2              9.45             1.18             9.53
+#> 3              9.38             1.58             9.51
+#> 4              9.81             1.43             9.92
+#> 5              9.25             1.29             9.34
+#> 6              9.70             1.07             9.76
 ```
 
 We can compare the disease-specific component of the healthy data and
