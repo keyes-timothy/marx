@@ -1,10 +1,21 @@
 Package: marx
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Decompose Biological Data into Components Using Matrix Factorization
+Version: 0.0.0.0
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+    c(person(given = "Timothy",
+             family = "Keyes",
+             role = c("cre"),
+             email = "tkeyes@stanford.edu", 
+             comment = c(ORCID = "0000-0003-0423-9679")),
+      person(given = "Kara", 
+             family = "Davis", 
+             role = c("rth", "own"),
+             email = "kldavis@stanford.edu"), 
+      person(given = "Garry", 
+             family = "Nolan", 
+             role = c("rth", "own"), 
+             email = "gnolan@stanford.edu"))   
+Description: marx is an R package that implements Matrix factorization and Residual Expression (MARX), an algorithm for comparing high-dimensional biological measurements to a lower-dimensional reference linear subspace. Currently, MARX is unpublished and highly experimental.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -12,8 +23,11 @@ RoxygenNote: 7.1.2
 URL: https://github.com/keyes-timothy/marx
 BugReports: https://github.com/keyes-timothy/marx/issues
 Suggests: 
+    ggplot2,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Depends: 
+    R (>= 4.1)
 Imports: 
     dplyr,
     PMA,
