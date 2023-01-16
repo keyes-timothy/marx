@@ -33,6 +33,7 @@
 #' `method` is a character vector of length 1 indicating which matrix factorization
 #' method was used (in this case, "svd").
 #'
+#' @export
 #'
 #'
 marx_find_healthy_subspace_svd <-
